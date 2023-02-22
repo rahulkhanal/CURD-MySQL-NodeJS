@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table{
+        width: 100%;
+    }
+    th,td{
+        border: 1px solid green;
+    }
+    th{
+        background-color: rgb(128, 226, 128);
+    }
+    button a{
+        text-decoration: none;
+        font-size: larger;
+    }
+</style>
+<body>
+    <table width="1px">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Gender</th>
+        </tr>
+            {{#data}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{Name}}</td>
+            <td>{{Address}}</td>
+            <td>{{Contact}}</td>
+            <td>{{Gender}}</td>
+        </tr>
+            {{/data}}
+    </table>
+    <center>
+        <button>
+            <a href="/">Go to Home</a>
+        </button>
+    </center>
+</body>
+
+</html>

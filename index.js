@@ -14,6 +14,23 @@ app.get("/add", (req, res) => {
 app.get("/delete", (req, res) => {
     res.render("remove")
 })
+
+
+//*********************** Add data to Databse **************************//
+app.get("/read", (req, res) => {
+    let qry = "SELECT * FROM myDetail"
+    mysql.query(qry, (err, result) => {
+        if (err) throw err;
+        else{
+            res.render("read", {data: result});
+        }
+    })
+})
+
+
+
+
+//*********************** Add data to Databse **************************//
 app.get("/adding", (req, res) => {
     //fetch data from form
     const { Name, addr, contact, gender } = req.query;
@@ -37,6 +54,10 @@ app.get("/adding", (req, res) => {
         }
     })
 })
+
+
+
+//*********************** Add data to Databse **************************//
 app.get("/remove", (req, res) => {
     const { Name, contact } = req.query;
     let qry = "SELECT * FROM myDetail WHERE Contact=? and Name=?"

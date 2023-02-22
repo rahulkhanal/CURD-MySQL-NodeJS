@@ -21,13 +21,14 @@ app.get("/adding", (req, res) => {
         if (err) throw err;
         else {
             if (results.length > 0) {
+                // res.send(results);
                 res.render("add", {checkMsg: true})
             }
             else {
                 let qry2 = "INSERT INTO myDetail (Name, Address, Contact, Gender) VALUES(?,?,?,?)";
                 mysql.query(qry2, [Name, addr, contact, gender], (err, result) => {
                     if(result.affectedRows > 0){
-                        res.render("add", {checkMsg: true})
+                        res.render("add", {successMsg: true})
                     }
                 })
             }

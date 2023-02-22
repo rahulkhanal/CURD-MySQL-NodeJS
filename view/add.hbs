@@ -50,11 +50,11 @@
         <br>
         <input type="submit" value="submit">
         
-        {{#if checkMsg}}
-        <h3>Data Inserted Successfully</h3>
+        {{#if successMsg}}
+        <span>Data Inserted Successfully</span>
         {{/if}}
-        {{#if alreadyMsg}}
-        <h3>Data Already Exist</h3>
+        {{#if checkMsg}}
+        <span>Contact Address Already Exist</span>
         {{/if}}
     </form>
 </body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            width: 400px;
+            margin: 10vh auto;
+            border: 1px solid black;
+            padding: 1rem;
+            border-radius: 17px;
+        }
+
+        form input {
+            display: flex;
+            width: 95%;
+            padding: 7px;
+        }
+        div input{
+            width: 20px;
+        }
+        div{
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/adding">
+        <label for="Name">Name</label>
+        <input type="text" name="Name">
+        <br>
+        <label for="addr">Address</label>
+        <input type="text" name="addr">
+        <br>
+        <label for="contact">Contact</label>
+        <input type="text" name="contact">
+        <br>
+        <label for="gender"><strong>Gender</strong></label>
+        <div>
+            <input type="radio" name="gender" value="Male"><p>Male</p>
+        </div>
+        <div>
+            <input type="radio" name="gender" value="Female"><p>Female</p>
+        </div>
+        <br>
+        <input type="submit" value="submit">
+        
+        {{#if checkMsg}}
+        <h3>Data Inserted Successfully</h3>
+        {{/if}}
+        {{#if alreadyMsg}}
+        <h3>Data Already Exist</h3>
+        {{/if}}
+    </form>
+</body>
+
+</html>

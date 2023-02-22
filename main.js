@@ -13,9 +13,10 @@ con.connect((err) => {
         console.log("Connection Created.............")
     }
 })
-con.query("SELECT * FROM myDetail",(err, result)=>{
-    if(err) throw err;
-})
+
+// con.query("SELECT * FROM myDetail",(err, result)=>{
+//     if(err) throw err;
+// })
 
 
 module.exports.con = con;

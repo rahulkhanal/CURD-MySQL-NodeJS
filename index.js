@@ -14,15 +14,17 @@ app.get("/add", (req, res) => {
 app.get("/delete", (req, res) => {
     res.render("remove")
 })
-
+app.get("/update", (req, res) => {
+    res.render("update")
+})
 
 //*********************** Add data to Databse **************************//
 app.get("/read", (req, res) => {
     let qry = "SELECT * FROM myDetail"
     mysql.query(qry, (err, result) => {
         if (err) throw err;
-        else{
-            res.render("read", {data: result});
+        else {
+            res.render("read", { data: result });
         }
     })
 })
@@ -54,9 +56,35 @@ app.get("/adding", (req, res) => {
         }
     })
 })
+//*********************** Update to Databse **************************//
 
+app.get("/updatesearch", (req,res)=>{
+    const {contact} = req.query;
+    let qry = "SELECT * FROM myDetail WHERE Contact=?"
+    mysql.query(qry, [contact], (err, result)=>{
+        console.log(result)
+        if(result.length > 0){
+            res.render("update",{foundMsg: true, data: result});
+        }
+        else{
+            res.render("update",{notFoundMsg: true});
+        }
+    })
+})
 
-
+app.get("/updateDetail", (req,res)=>{
+    console.log(req.query)
+    const {Name, addr, contact, gender} = req.query;
+    let qry = "UPDATE myDetail SET Name=?, Address=?, Gender=? WHERE Contact=?";
+    mysql.query(qry, [Name,addr,gender,contact], (err,result)=>{
+        if(err) throw err;
+        else{
+            if(result.affectedRows > 0){
+                res.render("update",{succes: true});
+            }
+        }
+    });
+})
 //*********************** Add data to Databse **************************//
 app.get("/remove", (req, res) => {
     const { Name, contact } = req.query;

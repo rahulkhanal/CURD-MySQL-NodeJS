@@ -8,20 +8,32 @@
     <title>Document</title>
 </head>
 <style>
-    table{
+    table {
         width: 100%;
     }
-    th,td{
+
+    th,
+    td {
         border: 1px solid green;
     }
-    th{
+
+    th {
         background-color: rgb(128, 226, 128);
     }
-    button a{
+
+    button a {
         text-decoration: none;
         font-size: larger;
     }
+
+    button {
+        margin-top: 2rem;
+    }
+    button{
+        padding: 1rem;
+    }
 </style>
+
 <body>
     <table width="1px">
         <tr>
@@ -31,7 +43,7 @@
             <th>Contact</th>
             <th>Gender</th>
         </tr>
-            {{#data}}
+        {{#data}}
         <tr>
             <td>{{id}}</td>
             <td>{{Name}}</td>
@@ -39,12 +51,14 @@
             <td>{{Contact}}</td>
             <td>{{Gender}}</td>
         </tr>
-            {{/data}}
+        {{/data}}
     </table>
     <center>
-        <button>
-            <a href="/">Go to Home</a>
-        </button>
+        <a href="/">
+            <button>
+                Go to Home
+            </button>
+        </a>
     </center>
 </body>
 

@@ -15,7 +15,6 @@ con.connect((err) => {
 })
 con.query("SELECT * FROM myDetail",(err, result)=>{
     if(err) throw err;
-    console.log(result);
 })
 
 

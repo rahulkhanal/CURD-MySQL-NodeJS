@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove</title>
+</head>
+<style>
+    body {
+        background-color: rgb(168, 196, 221);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    form {
+        background-color: rgb(56, 127, 189);
+        width: 400px;
+        margin: 10vh auto;
+        border: 1px solid rgb(58, 55, 55);
+        padding: 1rem;
+        border-radius: 17px;
+    }
+
+    form input {
+        display: flex;
+        width: 95%;
+        padding: 7px;
+    }
+
+    div input {
+        width: 20px;
+    }
+
+    button a{
+        text-decoration: none;
+        font-size: larger;
+    }
+</style>
+
+<body>
+    <center>
+        <h1>Remove Your Detail</h1>
+    </center>
+    <form action="remove">
+        <label for="addr">Name</label>
+        <input type="text" name="Name">
+        <br>
+        <label for="contact">Contact</label>
+        <input type="text" name="contact">
+        <br>
+        <input type="submit" value="submit">
+        {{#if dataNotFound}}
+        <p>No Data is Found</p>
+        {{/if}}
+        {{#if successDelete}}
+        <p>Deleted Successfully</p>
+        {{/if}}
+    </form>
+    <center>
+        <button>
+            <a href="/">Go to Home</a>
+        </button>
+    </center>
+</body>
+
+</html>

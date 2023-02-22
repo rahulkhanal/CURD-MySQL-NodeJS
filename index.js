@@ -11,10 +11,12 @@ app.get("/", (req, res) => {
 app.get("/add", (req, res) => {
     res.render("add")
 })
+app.get("/delete", (req, res) => {
+    res.render("remove")
+})
 app.get("/adding", (req, res) => {
     //fetch data from form
     const { Name, addr, contact, gender } = req.query;
-    console.log(Name, addr, contact, gender);
     //sanitization XSS............
     let qry = "SELECT * FROM myDetail WHERE Contact=?"
     mysql.query(qry, [contact], (err, results) => {
@@ -22,45 +24,43 @@ app.get("/adding", (req, res) => {
         else {
             if (results.length > 0) {
                 // res.send(results);
-                res.render("add", {checkMsg: true})
+                res.render("add", { checkMsg: true })
             }
             else {
                 let qry2 = "INSERT INTO myDetail (Name, Address, Contact, Gender) VALUES(?,?,?,?)";
                 mysql.query(qry2, [Name, addr, contact, gender], (err, result) => {
-                    if(result.affectedRows > 0){
-                        res.render("add", {successMsg: true})
+                    if (result.affectedRows > 0) {
+                        res.render("add", { successMsg: true })
                     }
                 })
             }
         }
     })
 })
-app.listen(8000, (err) => {
-    if (err) throw err;
-    else console.log("Running in the port........................");
+app.get("/remove", (req, res) => {
+    const { Name, contact } = req.query;
+    let qry = "SELECT * FROM myDetail WHERE Contact=? and Name=?"
+    mysql.query(qry, [contact, Name], (err, result) => {
+        if (err) throw err;
+        else {
+            if (result.length > 0) {
+                let qry2 = "DELETE FROM myDetail WHERE Contact=? and Name=?"
+                mysql.query(qry2, [contact, Name], (err, result) => {
+                    if (err) throw err;
+                    else {
+                        res.render("remove", { successDelete: true })
+                    }
+                })
+            } else {
+                res.render("remove", { dataNotFound: true })
+            }
+        }
+    })
 })
 
 
 
-
-
-
-
-
-
-
-
-
-
-// const emitter = require('events').EventEmitter;
-// var em = new emitter;
-
-// em.addListener('FirstEvent',(data)=>{
-//     console.log('First Subscriber:' + data);
-// })
-// em.addListener('SecondEvent',(data)=>{
-//     console.log('Second Subscriber:' + data);
-// })
-// em.emit('FirstEvent','This is me');
-
-// em.emit('SecondEvent','This is you');
+app.listen(8000, (err) => {
+    if (err) throw err;
+    else console.log("Running in the port........................");
+})

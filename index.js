@@ -18,7 +18,7 @@ app.get("/update", (req, res) => {
     res.render("update")
 })
 
-//*********************** Add data to Databse **************************//
+//*********************** Read data From Databse **************************//
 app.get("/read", (req, res) => {
     let qry = "SELECT * FROM myDetail"
     mysql.query(qry, (err, result) => {
@@ -37,7 +37,7 @@ app.get("/adding", (req, res) => {
     //fetch data from form
     const { Name, addr, contact, gender } = req.query;
     //sanitization XSS............
-    let qry = "SELECT * FROM myDetail WHERE Contact=?"
+    let qry = "SELECT * FROM myDetail WHERE contact=?"
     mysql.query(qry, [contact], (err, results) => {
         if (err) throw err;
         else {
@@ -46,7 +46,7 @@ app.get("/adding", (req, res) => {
                 res.render("add", { checkMsg: true })
             }
             else {
-                let qry2 = "INSERT INTO myDetail (Name, Address, Contact, Gender) VALUES(?,?,?,?)";
+                let qry2 = "INSERT INTO myDetail (Name, addr, contact, gender) VALUES(?,?,?,?)";
                 mysql.query(qry2, [Name, addr, contact, gender], (err, result) => {
                     if (result.affectedRows > 0) {
                         res.render("add", { successMsg: true })
@@ -60,7 +60,7 @@ app.get("/adding", (req, res) => {
 
 app.get("/updatesearch", (req,res)=>{
     const {contact} = req.query;
-    let qry = "SELECT * FROM myDetail WHERE Contact=?"
+    let qry = "SELECT * FROM myDetail WHERE contact=?"
     mysql.query(qry, [contact], (err, result)=>{
         console.log(result)
         if(result.length > 0){
@@ -75,7 +75,7 @@ app.get("/updatesearch", (req,res)=>{
 app.get("/updateDetail", (req,res)=>{
     console.log(req.query)
     const {Name, addr, contact, gender} = req.query;
-    let qry = "UPDATE myDetail SET Name=?, Address=?, Gender=? WHERE Contact=?";
+    let qry = "UPDATE myDetail SET Name=?, addr=?, gender=? WHERE contact=?";
     mysql.query(qry, [Name,addr,gender,contact], (err,result)=>{
         if(err) throw err;
         else{
@@ -85,15 +85,15 @@ app.get("/updateDetail", (req,res)=>{
         }
     });
 })
-//*********************** Add data to Databse **************************//
+//*********************** Delete data from Databse **************************//
 app.get("/remove", (req, res) => {
     const { Name, contact } = req.query;
-    let qry = "SELECT * FROM myDetail WHERE Contact=? and Name=?"
+    let qry = "SELECT * FROM myDetail WHERE contact=? and Name=?"
     mysql.query(qry, [contact, Name], (err, result) => {
         if (err) throw err;
         else {
             if (result.length > 0) {
-                let qry2 = "DELETE FROM myDetail WHERE Contact=? and Name=?"
+                let qry2 = "DELETE FROM myDetail WHERE contact=? and Name=?"
                 mysql.query(qry2, [contact, Name], (err, result) => {
                     if (err) throw err;
                     else {
